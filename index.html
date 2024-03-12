@@ -1,1 +1,45 @@
-html
+<head>
+    <body>
+        <script>
+
+         
+    // hier verklaar ik de variabele die worden gebruikt in dit programma
+    var zoekGetal, i;
+    var aantal;
+
+    window.alert("Hoeveel getallen wilt u aanvragen?");
+    aantal = Number(window.prompt('Enter a value for aantal'));
+    var getallenRij = new Array(aantal);
+
+    // In deze loop wordt het aantal ingevoerde getallen geselecteerd
+    for (i = 0; i <= aantal - 1; i++) {
+        getallenRij[i] = Math.floor(Math.random() * 100);
+    }
+    var temp;
+    var teller;
+
+    // in deze loop worden de getallen gesorteerd van klein naar groot
+    for (teller = 1; teller <= aantal; teller++) {
+        for (i = 0; i <= aantal - 2; i++) {
+
+            // in dit if-statement worden de getallen als ze nog niet in de goede volgorde staan op de goede volgorde gesorteerd
+            if (getallenRij[i] > getallenRij[i + 1]) {
+                temp = getallenRij[i];
+                getallenRij[i] = getallenRij[i + 1];
+                getallenRij[i + 1] = temp;
+            }
+        }
+    }
+    teller = 0;
+
+    // In deze loop worden de getallen uitgevoerd
+    for (teller = 0; teller <= aantal - 1; teller++) {
+        window.alert(getallenRij[teller]);
+    }
+    window.alert("alstublieft! De getallen die u heeft gekozen staan nu in volgorde van klein naar groot.");
+    window.alert("Dankjewel voor het gebruiken van mijn progamma.");
+
+
+        </script>
+    </body>
+</head>
