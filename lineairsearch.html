@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoeken in een getallenrij</title>
+</head>
+<body>
+    <script>
+        var zoekGetal, i;
+        var getallenRij = new Array(10);
+
+        for (i = 0; i <= 9; i++) {
+            getallenRij[i] = Math.floor(Math.random() * 100);
+        }
+        window.alert("Welk getal wil je zoeken: ");
+        zoekGetal = parseInt(prompt('Voer een waarde in voor zoekGetal'));
+
+        i = 0;
+
+        // Loop door de getallenRij om het zoekGetal te vinden
+        while (getallenRij[i] !== zoekGetal && i < 9) {
+            i++;
+        }
+
+        // Controleer of het zoekGetal is gevonden
+        if (getallenRij[i] === zoekGetal) {
+            window.alert(zoekGetal.toString() + " staat op plek " + i);
+        } else {
+            window.alert("Getal niet gevonden.");
+        }
+    </script>
+</body>
+</html>

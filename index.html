@@ -1,45 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <body>
-        <script>
-
-         
-    // hier verklaar ik de variabele die worden gebruikt in dit programma
-    var zoekGetal, i;
-    var aantal;
-
-    window.alert("Hoeveel getallen wilt u aanvragen?");
-    aantal = Number(window.prompt('Enter a value for aantal'));
-    var getallenRij = new Array(aantal);
-
-    // In deze loop wordt het aantal ingevoerde getallen geselecteerd
-    for (i = 0; i <= aantal - 1; i++) {
-        getallenRij[i] = Math.floor(Math.random() * 100);
-    }
-    var temp;
-    var teller;
-
-    // in deze loop worden de getallen gesorteerd van klein naar groot
-    for (teller = 1; teller <= aantal; teller++) {
-        for (i = 0; i <= aantal - 2; i++) {
-
-            // in dit if-statement worden de getallen als ze nog niet in de goede volgorde staan op de goede volgorde gesorteerd
-            if (getallenRij[i] > getallenRij[i + 1]) {
-                temp = getallenRij[i];
-                getallenRij[i] = getallenRij[i + 1];
-                getallenRij[i + 1] = temp;
-            }
-        }
-    }
-    teller = 0;
-
-    // In deze loop worden de getallen uitgevoerd
-    for (teller = 0; teller <= aantal - 1; teller++) {
-        window.alert(getallenRij[teller]);
-    }
-    window.alert("alstublieft! De getallen die u heeft gekozen staan nu in volgorde van klein naar groot.");
-    window.alert("Dankjewel voor het gebruiken van mijn progamma.");
-
-
-        </script>
-    </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteer Getallen</title>
 </head>
+<body>
+    <script>
+        // Functie om een array van opgegeven lengte te maken met willekeurige getallen
+        function createArray(length) {
+            return Array.from({length}, () => Math.floor(Math.random() * 100));
+        }
+
+        // Functie om getallen oplopend te sorteren
+        function sortNumbersAscending(numbers) {
+            return numbers.slice().sort((a, b) => a - b);
+        }
+
+        // Functie om getallen aflopend te sorteren
+        function sortNumbersDescending(numbers) {
+            return numbers.slice().sort((a, b) => b - a);
+        }
+
+        // Hoofdfunctionaliteit van het programma
+        function main() {
+            // Begroeting van de gebruiker met een welkomstbericht
+            alert("Hallo mijn beste gebruiker! In dit programma kunt u kiezen uit een bepaald aantal getallen en deze worden voor u in de juiste volgorde van klein naar groot of van groot naar klein gesorteerd.");
+
+            // Vraag de gebruiker om het aantal getallen dat ze willen genereren
+            var aantal = Number(prompt('Hoeveel getallen wilt u aanvragen?'));
+            // Genereer een array met de opgegeven hoeveelheid getallen
+            var getallenRij = createArray(aantal);
+
+            // Vraag de gebruiker om de sorteervolgorde te kiezen
+            var keuze = Number(prompt('Kies het getal 1 als u de getallen van klein naar groot wilt sorteren en kies een ander willekeurig getal als u het van groot naar klein wilt sorteren.'));
+
+            // Sorteer de getallen op basis van de keuze van de gebruiker
+            if (keuze === 1) {
+                getallenRij = sortNumbersAscending(getallenRij);
+            } else {
+                getallenRij = sortNumbersDescending(getallenRij);
+            }
+
+            // Toon de gesorteerde getallen aan de gebruiker
+            alert("De gesorteerde getallen zijn: " + getallenRij.join(", "));
+            // Toon een felicitatiebericht aan de gebruiker
+            alert("Gefeliciteerd! De getallen die u heeft gekozen zitten nu in de juiste volgorde.");
+            // Bedank de gebruiker voor het gebruik van het programma
+            alert("Dankjewel voor het gebruiken van mijn programma.");
+        }
+
+        // Roep de hoofdfunctie aan wanneer de pagina laadt
+        main(); 
+    </script>
+</body>
+</html>
