@@ -1,69 +1,68 @@
+<!DOCTYPE html>
+<html lang="nl">
 <head>
-    <body>
-        <script>
-
-    // dit programma zoekt een getal door middel van binairy search en voert het uit aan de gebruiker van het programma
-    // hier verklaar ik een aantal variabele die gebruikt worden in dit programma
-    var getal, aantal, teller, teller2, tussenmap, i, gekozengetal, plek, start, eind, midden, middelstegetal;
-    var antwoord;
-    var reeks = createArray(50);
-
-    // in deze loop worden een aantal getallen gekozen
-    for (aantal = 0; aantal <= 49; aantal++) {
-
-        // Computer kiest een getal
-        getal = Math.floor(Math.random() * 99);
-
-        // Gekozen getal in de mapjes
-        reeks[aantal] = getal;
-    }
-    for (teller2 = 1; teller2 <= aantal; teller2++) {
-
-        // In deze loop wordt het getal gezocht
-        for (teller = 0; teller <= aantal - 2; teller++) {
-            if (reeks[teller] > reeks[teller + 1]) {
-
-                // getallen omdraaien als 1e getal groter is dan 2e getal.
-                tussenmap = reeks[teller];
-                reeks[teller] = reeks[teller + 1];
-                reeks[teller + 1] = tussenmap;
-            }
-        }
-    }
-    window.alert("Welk getal zoek je? " + "kies 0-100.");
-    gekozengetal = Number(window.prompt('Enter a value for gekozengetal'));
-
-    // pak de hele (50 nummers) reeks
-    start = 0;
-    eind = reeks.length;
-    var gevonden;
-
-    gevonden = false;
-
-    // De binairy search blijft zich herhalen tot het goede getal is gevonden
-    while (start <= eind) {
-
-        // bepaal het midden.
-        midden = (double) (start + eind) / 2;
-        if (gekozengetal == reeks[midden]) {
-            start = eind + 1;
-            gevonden = true;
-        } else {
-            if (gekozengetal > reeks[midden]) {
-                start = midden + 1;
-            } else {
-                eind = midden - 1;
-            }
-        }
-    }
-    plek = midden + 1;
-    if (gevonden) {
-        window.alert("Nummer " + gekozengetal + " staat erin op plek " + plek);
-    } else {
-        window.alert(gekozengetal.ToString() + " staat er niet in.");
-    }
-
-
-        </script>
-    </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search</title>
 </head>
+<body>
+
+<script>
+// Functie om een array van de opgegeven grootte te maken en te vullen met willekeurige getallen
+function createRandomArray(size) {
+    var array = [];
+    for (var i = 0; i < size; i++) {
+        array.push(Math.floor(Math.random() * 99));
+    }
+    return array;
+}
+
+// Functie voor het uitvoeren van binary search
+function binarySearch(reeks, gekozengetal) {
+    var start = 0;
+    var eind = reeks.length - 1;
+    var plek = -1; // Initializeer de plek als -1, wat betekent dat het getal niet is gevonden
+    var gevonden = false;
+
+    while (start <= eind) {
+        var midden = Math.floor((start + eind) / 2);
+        if (gekozengetal === reeks[midden]) {
+            plek = midden + 1; // Tel 1 op bij de index omdat plekken meestal vanaf 1 worden geteld
+            gevonden = true;
+            break; // Stop de lus als het getal is gevonden
+        } else if (gekozengetal > reeks[midden]) {
+            start = midden + 1;
+        } else {
+            eind = midden - 1;
+        }
+    }
+
+    return { gevonden: gevonden, plek: plek };
+}
+
+// Hoofdfunctie
+function main() {
+    var aantal = 50; // Aantal getallen in de reeks
+    var reeks = createRandomArray(aantal); // Genereer een array met willekeurige getallen
+
+    // Sorteer de array
+    reeks.sort(function(a, b) { return a - b; });
+
+    var gekozengetal = parseInt(prompt("Welk getal zoek je? Kies een getal tussen 0 en 100:"));
+
+    // Voer binary search uit
+    var resultaat = binarySearch(reeks, gekozengetal);
+
+    if (resultaat.gevonden) {
+        alert("Nummer " + gekozengetal + " staat erin op plek " + resultaat.plek);
+    } else {
+        alert(gekozengetal + " staat er niet in.");
+    }
+}
+
+// Roep de hoofdfunctie aan wanneer de pagina is geladen
+main();
+</script>
+
+</body>
+</html>
